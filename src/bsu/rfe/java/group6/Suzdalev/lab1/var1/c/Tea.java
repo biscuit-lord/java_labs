@@ -39,6 +39,6 @@ public class Tea extends Food{
 	}
 
 	public String toString() {
-		return super.toString() + " color '" + color.toLowerCase() + "'";
+		return super.toString() + " '" + color.toLowerCase() + "'";
 	}
 }
