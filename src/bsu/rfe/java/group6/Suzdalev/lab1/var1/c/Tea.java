@@ -37,14 +37,6 @@ public class Tea extends Food{
 		}
 		this.color = color;
 	}
-	
-	public boolean equals(Object another) {
-		if (super.equals(another)) {
-			if (!(another instanceof Tea)) return false; 
-				return color.equals(((Tea)another).color); 
-		} else
-			return false;
-	}
 
 	public String toString() {
 		return super.toString() + " color '" + color.toLowerCase() + "'";

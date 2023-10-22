@@ -3,13 +3,8 @@ package bsu.rfe.java.group6.Suzdalev.lab1.var1.c;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		Food[] breakfast = new Food[20];
-		int itemsSoFar = 0;
-		for (String arg: args) {
-			String[] entered_line = arg.split("/");
-			if (entered_line[0].equals("Tea")) {
-				breakfast[itemsSoFar] = new Tea();
-			}
-			itemsSoFar++;
+		for (int itemsSoFar = 0;itemsSoFar < 10; ++itemsSoFar) {
+			breakfast[itemsSoFar] = new Tea();
 		}
 		
 		for (Food item: breakfast)
