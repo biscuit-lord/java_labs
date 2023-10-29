@@ -1,4 +1,4 @@
-package bsu.rfe.java.group6.Suzdalev.lab1.var1.c;
+package bsu.rfe.java.group6.Suzdalev.lab1.var1.a;
 
 public abstract class Food implements Consumable {
 	String name = null;

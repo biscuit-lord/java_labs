@@ -1,4 +1,4 @@
-package bsu.rfe.java.group6.Suzdalev.lab1.var1.c;
+package bsu.rfe.java.group6.Suzdalev.lab1.var1.a;
 import java.util.Random;
 
 public class Tea extends Food{
