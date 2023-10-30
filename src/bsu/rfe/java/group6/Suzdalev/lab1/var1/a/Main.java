@@ -9,8 +9,17 @@ public class Main {
 		System.out.println("What will be in breakfast?");
 		int itemsSoFar = 0;
 		for (String product: istream.nextLine().split(" ")) {
-			if (product.toLowerCase().equals("tea")) {
-				breakfast[itemsSoFar] = new Tea();				
+			String[] detailed_product = product.toLowerCase().split("-");
+			if (detailed_product[0].equals("tea")) {
+				if (detailed_product.length > 1 && detailed_product[1].length() > 0) { breakfast[itemsSoFar] = new Tea(detailed_product[1]); }
+				else { breakfast[itemsSoFar] = new Tea(); }
+			}
+			else if (detailed_product[0].equals("apple")) {
+				if (detailed_product.length > 1 && detailed_product[1].length() > 0) { breakfast[itemsSoFar] = new Apple(detailed_product[1]); }
+				else { breakfast[itemsSoFar] = new Apple(); }
+			}
+			else if (detailed_product[0].equals("cheese")) {
+				breakfast[itemsSoFar] = new Cheese();				
 			}
 			++itemsSoFar;
 		}

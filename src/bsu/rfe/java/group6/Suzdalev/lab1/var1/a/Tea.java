@@ -6,10 +6,10 @@ public class Tea extends Food{
 	
 	public Tea(String color) {
 		super("Tea");
-		if (color != "green" || color != "black") {
-			throw new IllegalArgumentException("You can provide black or green colors only.");
+		if (color.equals("green") || color.equals("black")) {
+			this.color = color;
 		}
-		this.color = color;
+		else { throw new IllegalArgumentException("You can provide black or green colors only."); }
 	}
 	
 	public Tea() {
@@ -39,6 +39,6 @@ public class Tea extends Food{
 	}
 
 	public String toString() {
-		return super.toString() + " '" + color.toLowerCase() + "'";
+		return super.toString() + " of color '" + color.toUpperCase() + "'";
 	}
 }
