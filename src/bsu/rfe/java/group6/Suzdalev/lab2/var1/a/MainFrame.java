@@ -133,7 +133,13 @@ public class MainFrame extends JFrame {
 		JButton buttonM = new JButton("M+");
 		buttonM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				formula.addSum(Double.parseDouble(textFieldResult.getText()));
+				try {
+					formula.addSum(Double.parseDouble(textFieldResult.getText()));
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(MainFrame.this,
+							"Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+							JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		
