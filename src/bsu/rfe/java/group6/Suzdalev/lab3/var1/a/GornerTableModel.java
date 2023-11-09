@@ -1,5 +1,6 @@
 package bsu.rfe.java.group6.Suzdalev.lab3.var1.a;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 public class GornerTableModel extends AbstractTableModel {
@@ -27,12 +28,9 @@ public class GornerTableModel extends AbstractTableModel {
 		return 3;
 	}
 	public int getRowCount() {
-		// Вычислить количество точек между началом и концом отрезка
-		// исходя из шага табулирования
 		return new Double(Math.ceil((to-from)/step)).intValue()+1;
 	}
 	public Object getValueAt(int row, int col) {
-		// Вычислить значение X как НАЧАЛО_ОТРЕЗКА + ШАГ*НОМЕР_СТРОКИ
 		double x = from + step*row;
 		if (col==0) {
 			return x;
@@ -47,7 +45,7 @@ public class GornerTableModel extends AbstractTableModel {
 			for (int n = coefficients.length - 2; n >= 0; --n) {
 				result = coefficients[n] + result * x;
 			}
-			return result;
+			return result;				
 		}
 	}
 	public String getColumnName(int col) {

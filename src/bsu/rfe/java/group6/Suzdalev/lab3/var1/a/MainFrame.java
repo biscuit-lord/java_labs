@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 		searchValueMenuItem = tableMenu.add(searchValueAction);
 		searchValueMenuItem.setEnabled(false);
 		
-		Action inputCoefficientsAction = new AbstractAction("Ввести коэффициенты") {
+		Action inputCoefficientsAction = new AbstractAction("Задать коэффициенты") {
 			public void actionPerformed(ActionEvent event) {
 				String[] values = JOptionPane.showInputDialog(MainFrame.this, "Введите коэффициенты через пробел: ").split(" ");
 				coefficients = new Double[values.length];
@@ -115,8 +115,11 @@ public class MainFrame extends JFrame {
 					try {
 						coefficients[i] = Double.parseDouble(values[i]);
 					} catch (NumberFormatException ex) {
-						System.out.println("Ошибка преобразования строки '" + values[i] + "' в число типа Double");
-						System.exit(-2);
+						JOptionPane.showMessageDialog(MainFrame.this,
+								"Ошибка преобразования строки '" + values[i] + "' в число типа Double", "Ошибочный формат числа", 
+								JOptionPane.WARNING_MESSAGE);
+						coefficients = null;
+						break;
 					}
 				}
 			}
@@ -126,7 +129,7 @@ public class MainFrame extends JFrame {
 		Action aboutProgramAction = new AbstractAction("О программе") {
 			public void actionPerformed(ActionEvent event) {
 				JOptionPane.showMessageDialog(MainFrame.this,
-					    "Данная программа создана студентом 2 курса 6 группы Суздалевым Виталием.");
+					    "Данная программа создана студентом 2 курса 6 группы Суздалевым Виталием");
 			}
 		};
 		helpMenu.add(aboutProgramAction);
@@ -167,24 +170,30 @@ public class MainFrame extends JFrame {
 		JButton buttonCalc = new JButton("Вычислить");
 		buttonCalc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				try {
-					Double from = Double.parseDouble(textFieldFrom.getText());
-					Double to = Double.parseDouble(textFieldTo.getText());
-					Double step = Double.parseDouble(textFieldStep.getText());
-					data = new GornerTableModel(from, to, step, MainFrame.this.coefficients);
-					JTable table = new JTable(data);
-					table.setDefaultRenderer(Double.class, renderer);
-					table.setRowHeight(30);
-					hBoxResult.removeAll();
-					hBoxResult.add(new JScrollPane(table));
-					getContentPane().validate();
-					saveToTextMenuItem.setEnabled(true);
-					saveToGraphicsMenuItem.setEnabled(true);
-					searchValueMenuItem.setEnabled(true);
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(MainFrame.this,
-							"Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+				if (coefficients == null) {
+					JOptionPane.showMessageDialog(null,
+							"Коэффициенты можно задать, перейдя по вкладкам 'Таблица' -> 'Задать коэффициенты'", "Не заданы коэффициенты",
 							JOptionPane.WARNING_MESSAGE);
+				} else {
+					try {
+						Double from = Double.parseDouble(textFieldFrom.getText());
+						Double to = Double.parseDouble(textFieldTo.getText());
+						Double step = Double.parseDouble(textFieldStep.getText());
+						data = new GornerTableModel(from, to, step, MainFrame.this.coefficients);
+						JTable table = new JTable(data);
+						table.setDefaultRenderer(Double.class, renderer);
+						table.setRowHeight(30);
+						hBoxResult.removeAll();
+						hBoxResult.add(new JScrollPane(table));
+						getContentPane().validate();
+						saveToTextMenuItem.setEnabled(true);
+						saveToGraphicsMenuItem.setEnabled(true);
+						searchValueMenuItem.setEnabled(true);
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(MainFrame.this,
+								"Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+								JOptionPane.WARNING_MESSAGE);
+					}					
 				}
 			}
 		});
