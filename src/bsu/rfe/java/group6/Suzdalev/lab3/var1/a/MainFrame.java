@@ -109,18 +109,21 @@ public class MainFrame extends JFrame {
 		
 		Action inputCoefficientsAction = new AbstractAction("Задать коэффициенты") {
 			public void actionPerformed(ActionEvent event) {
-				String[] values = JOptionPane.showInputDialog(MainFrame.this, "Введите коэффициенты через пробел: ").split(" ");
-				coefficients = new Double[values.length];
-				for (int i = 0; i < coefficients.length; ++i) {
-					try {
-						coefficients[i] = Double.parseDouble(values[i]);
-					} catch (NumberFormatException ex) {
-						JOptionPane.showMessageDialog(MainFrame.this,
-								"Ошибка преобразования строки '" + values[i] + "' в число типа Double", "Ошибочный формат числа", 
-								JOptionPane.WARNING_MESSAGE);
-						coefficients = null;
-						break;
-					}
+				String input = JOptionPane.showInputDialog(MainFrame.this, "Введите коэффициенты через пробел: ");
+				if (input != null) {
+					String[] values = input.split(" ");
+					coefficients = new Double[values.length];
+					for (int i = 0; i < coefficients.length; ++i) {
+						try {
+							coefficients[i] = Double.parseDouble(values[i]);
+						} catch (NumberFormatException ex) {
+							JOptionPane.showMessageDialog(MainFrame.this,
+									"Ошибка преобразования строки '" + values[i] + "' в число типа Double", "Ошибочный формат числа", 
+									JOptionPane.WARNING_MESSAGE);
+							coefficients = null;
+							break;
+						}
+					}					
 				}
 			}
 		};
